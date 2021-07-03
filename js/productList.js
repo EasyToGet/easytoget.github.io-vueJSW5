@@ -141,7 +141,7 @@ const app = Vue.createApp({
       axios.get(api)
         .then(res => {
           if (res.data.success) {
-            // console.log(res);
+            console.log(res.data.data);
             this.cart = res.data.data;
           } else {
             alert(res.data.message);
@@ -158,6 +158,7 @@ const app = Vue.createApp({
           if (res.data.success) {
             alert(res.data.message);
             this.$refs.form.resetForm(); // 清除 user 個人資料表單
+            this.resetFormUser();
             this.getCart();
           } else {
             alert(res.data.message);
@@ -169,6 +170,13 @@ const app = Vue.createApp({
       const phoneNumber = /^(09)[0-9]{8}$/
       return phoneNumber.test(value) ? true : '需要正確的電話號碼'
     },
+    resetFormUser() {
+      this.form.user.email = '';
+      this.form.user.name = '';
+      this.form.user.tel = '';
+      this.form.user.address = '';
+      this.form.message = '';
+    }
   },
   mounted() {
     this.getProducts();
